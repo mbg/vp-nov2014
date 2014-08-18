@@ -128,7 +128,7 @@ checkEnded t b
 
 gameStep :: Float -> GlossState -> IO GlossState
 gameStep _ (t,b) 
- | t == computer = checkEnded human $ search'' computer b
+ | t == computer = checkEnded human $ search computer b
  | otherwise     = return (human, b)
 
 displaySettings :: Display
