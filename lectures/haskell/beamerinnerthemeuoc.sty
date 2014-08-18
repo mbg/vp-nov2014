@@ -1,0 +1,36 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \node [anchor=north east] (label) at (\the\paperwidth-15,\the\paperheight-10) {\includegraphics[scale=0.3]{uc-cmyk.eps}};
+  \usebeamercolor{structure dark};
+  \fill[color=bg] (0,0) rectangle (\the\paperwidth,3.0);
+  \usebeamercolor{structure light};
+  \fill[color=bg] (0,3.0) rectangle(\the\paperwidth,3.2);
+  \ifnum\thepage>1\relax%
+   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+   \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{uoc}[1][]
+{ 
+	\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	\usebeamercolor{title page header};
+	\node[anchor=south west,color=fg] at (0,4.0) {\usebeamerfont{title}\textbf{\inserttitle}};
+	\usebeamercolor{subtitle page header};
+	\node[anchor=south west,color=fg] at (0,3.6) {\usebeamerfont{subtitle}\insertsubtitle};	
+	\usebeamercolor{author};
+	\node[anchor=north west,color=fg] at (0,2.8) {\usebeamerfont{author}\footnotesize\textbf{\insertauthor}};
+	\usebeamercolor{institute};
+	\node[anchor=north west,color=fg] at (0,2.4) {\usebeamerfont{institute}\footnotesize\insertinstitute};
+	\usebeamercolor{date};
+	\node[anchor=north west,color=fg] at (0,1.6) {\usebeamerfont{date}\footnotesize\insertdate};	
+	\end{tikzpicture}
+  \vfill
+}
+
+\mode<all>
