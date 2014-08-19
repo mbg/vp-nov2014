@@ -1,0 +1,23 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{uoc}[1][]
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1);
+  \usebeamercolor{structure dark};
+  \fill[bg] (0,0) rectangle(\the\paperwidth,1.5);
+   \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, white,font=\large] at (1,0.56){\insertframetitle};}
+      \else%
+      {\node[anchor= west, white,font=\large] at (1,0.76){\insertframetitle};%
+       \node[anchor= west, white,font=\small] at (1,0.36){\insertframesubtitle};}%
+      \fi
+  \usebeamercolor{structure light};
+  \fill[bg] (0,0) rectangle(\the\paperwidth,0.1);
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\mode<all>
