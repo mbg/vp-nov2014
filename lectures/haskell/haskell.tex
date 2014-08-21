@@ -2,6 +2,9 @@
 % use aspectratio=1610 for 16:10 aspect ratio (widescreen)
 % use aspectratio=43 for 4:3 aspect ratio 
 \documentclass[aspectratio=43]{beamer}
+\usepackage{fancyeq}
+
+
 \usetheme{uoc}
 
 % change this to 'uoc-blue', 'uoc-red', etc. for different
@@ -23,31 +26,92 @@
 \author{Michael B. Gale}
 \institute{Computer Laboratory, University of Cambridge}
 
+\newcommand{\keyword}[1]{{\color{blue}#1}}
+
+\newcommand{\expressions}[1]{
+\begin{tikzpicture}[remember picture,overlay]
+\node [shift={(-4 cm,-1.5cm)}] at (current page.north east)
+{
+\begin{tikzpicture}[remember picture, overlay]
+\usebeamercolor{structure dark};
+\node[fill=bg,text=fg,font=\tiny,anchor=north west,minimum width=3.5cm, align=left, text width=2.9cm] at (-0.01cm,0cm){\\#1};
+\usebeamercolor{structure light};
+\fill[bg] (0,0) rectangle(3.5cm,-0.1cm);
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
 
 \begin{document}
 \begin{frame}
 \maketitle
 \end{frame}
 
-\begin{frame}{Imperative Programming}
-\begin{itemize}
-\item Bullet
-\item points
-\item are
-\item overused
-\end{itemize}
+\begin{frame}{Computers are dumb...}
+We need to give them step-by-step instructions on how to do things:\\[1cm]
+\begin{tabular}[t]{l}
+\texttt{\keyword{int} n = 0;} \\
+\texttt{\keyword{for}(\keyword{int} i=0; i<20; i++)} \\
+\texttt{\{} \\
+\texttt{   n += i;}\\
+\texttt{\}}
+\end{tabular} 
 \end{frame}
 
-\begin{frame}[fragile]{Functional Programming}
-\begin{verbatim}
-sum [0..20]
-\end{verbatim}
+\begin{frame}{Specfication}
+But we just say ``a program that sums all numbers from 0 to 20'' or give a formal, mathematical specification:
+\begin{center}
+\begin{displaymath}
+\sum_{i=0}^{20}
+\end{displaymath}
+\end{center}
+Formal specification is particularly useful as we can use proof techniques to reason about it.
 \end{frame}
 
 \begin{frame}
+Specification and implementation are disjoint, despite representing the same thing:
 \begin{center}
-This frame is intentionally left blank.
+\begin{tabular}{cc}
+\textbf{Specification} &  \textbf{Implementation} \\ \hline \\[-0.3cm]
+\begin{tabular}{@{}l@{}}
+$\displaystyle\sum_{i=0}^{20} i$ 
+\end{tabular}&  \begin{tabular}[t]{@{}l@{}}
+\texttt{\keyword{int} n = 0;} \\
+\texttt{\keyword{for}(\keyword{int} i=0; i<20; i++)} \\
+\texttt{\{} \\
+\texttt{   n += i;}\\
+\texttt{\}}
+\end{tabular} 
+\end{tabular}
 \end{center}
+Either one could contain errors!
+\end{frame}
+
+\begin{frame}{Functional Programming}
+Programming paradigm based on mathematical functions rather than procedures:
+\begin{center}
+\texttt{sum [0..20]}
+\end{center}
+Specification is the implementation! The compiler works out how to translate this into something a computer can understand.
+\end{frame}
+
+\begin{frame}
+Imperative programming is based on statements which manipulate values in memory. \\[1cm]
+Functional programming is based on the evaluation of expressions.
+\end{frame}
+
+\begin{frame}{Haskell}
+A non-strict, purely-functional programming language.
+\begin{itemize}
+\item Non-strict: only evaluates expressions when their value is needed
+\item Purely-functional: the result of a function can only depend on the arguments
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Expressions}
+\expressions{
+\textbf{Expressions} \\
+Values: \texttt{6}, \texttt{"Hello"}, $\ldots$ \\ Operators: \texttt{e1 + e2}}
 \end{frame}
 
 \end{document}

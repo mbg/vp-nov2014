@@ -1,4 +1,16 @@
 \mode<presentation>
+{
+  \def\beamer@calltheme#1#2#3{%
+    \def\beamer@themelist{#2}
+    \@for\beamer@themename:=\beamer@themelist\do
+    {\usepackage[{#1}]{#3\beamer@themename}}}
+
+  \renewcommand\usetheme[2][]{\beamer@calltheme{#1}{#2}{beamertheme}}
+  \renewcommand\usecolortheme[2][]{\beamer@calltheme{#1}{#2}{beamercolortheme}}
+  \renewcommand\usefonttheme[2][]{\beamer@calltheme{#1}{#2}{beamerfonttheme}}
+  \renewcommand\useoutertheme[2][]{\beamer@calltheme{#1}{#2}{beameroutertheme}}
+  \renewcommand\useinnertheme[2][]{\beamer@calltheme{#1}{#2}{beamerinnertheme}}
+}
 
 \RequirePackage{tikz}
 \usepackage{epstopdf}
@@ -17,5 +29,19 @@
 \setbeamertemplate{subitems}[square]
 \setbeamercolor{itemize item}{fg=black}
 \setbeamercolor{itemize subitem}{fg=black}
+
+\newcommand{\notebox}[3]{
+\begin{tikzpicture}[remember picture,overlay]
+\node [shift={#1}] at (current page.north east)
+{
+\begin{tikzpicture}[remember picture, overlay]
+\usebeamercolor{structure dark};
+\node[fill=bg,text=fg,font=\tiny,anchor=north west,minimum width=#2, align=left, text width=#2-0.6cm] at (-0.01cm,0cm){\\#3};
+\usebeamercolor{structure light};
+\fill[bg] (0,0) rectangle(#2,-0.1cm);
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
 
 \mode<all>
